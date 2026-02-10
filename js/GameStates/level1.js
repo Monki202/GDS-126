@@ -10,7 +10,7 @@ var level = new GameObject({x:0,y:0});
 
 //Avatar
 var wiz = new GameObject({width:128, height:128, spriteData:playerData}).makeSprite(playerData)
-wiz.force=1
+wiz.force=1.5
 
 //The ground
 var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2-200,height:64,y:canvas.height-32, color:"green", world:level})

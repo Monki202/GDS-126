@@ -19,35 +19,38 @@ Properties:
 
 var playerData ={
 	info:{
-		src:`images/LilAnimation.png`
+		src:`images/RobotSpriteSheet.png`
 	},
 	states:{
 		//The idle animation 
     	idle:
 		{
-			fps:15,
+			fps:5,
 			cycle:true,
 			frames:
 			[
 				{width:128, height:128, startX:0, startY:0},
 				{width:128, height:128, startX:128, startY:0},
 				{width:128, height:128, startX:256, startY:0},
-				{width:128, height:128, startX:384, startY:0},
-				{width:128, height:128, startX:0, startY:128}
+				{width:128, height:128, startX:0, startY:128},
+				{width:128, height:128, startX:128, startY:128}
 			]
 		},
 		//The walwidth:128, height:128,
 		walk:
 		{
-			fps:1,
+			fps:2,
 			cycle:true,
 			frames:
 			[
-				{width:128, height:128, startX:0, startY:0},
-				{width:128, height:128, startX:128, startY:0},
-				{width:128, height:128, startX:256, startY:0},
-				{width:128, height:128, startX:384, startY:0},
-				{width:128, height:128, startX:512, startY:0}
+				{width:128, height:128, startX:0, startY:256},
+				{width:128, height:128, startX:128, startY:256},
+				{width:128, height:128, startX:256, startY:256},
+				{width:128, height:128, startX:0, startY:384},
+				{width:128, height:128, startX:128, startY:384},
+				{width:128, height:128, startX:256, startY:384},
+				{width:128, height:128, startX:0, startY:512},
+				{width:128, height:128, startX:128, startY:512}
 			]
 		},
 		//The jump animation 
