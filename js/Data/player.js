@@ -56,25 +56,46 @@ var playerData ={
 		//The jump animation 
 		jump:
 		{
-			fps:15,
-			cycle:false,
+			fps:1,
+			cycle:true,
 			frames:
 			[
-				{width:128, height:128, startX:640, startY:0}
+				{width:128, height:128, startX:0, startY:640},
+				{width:128, height:128, startX:128, startY:640},
+				{width:128, height:128, startX:256, startY:640},
+				{width:128, height:128, startX:0, startY:768},
+				{width:128, height:128, startX:128, startY:768},
+				{width:128, height:128, startX:256, startY:768}
 			]
 		},
 		//The crouch animation 
 		crouch:
 		{
-			fps:15,
-			cycle:true,
+			fps:6,
+			cycle:false,
 			frames:
 			[
-				{width:128, height:128, startX:768, startY:0},
-				{width:128, height:128, startX:768, startY:0},
-				{width:128, height:128, startX:768, startY:0},
-				{width:128, height:128, startX:768, startY:0},
-				{width:128, height:128, startX:896, startY:0}
+				{width:128, height:128, startX:0, startY:896},
+				{width:128, height:128, startX:128, startY:896},
+				{width:128, height:128, startX:256, startY:896},
+				{width:128, height:128, startX:0, startY:1024},
+				{width:128, height:128, startX:128, startY:1024},
+				{width:128, height:128, startX:256, startY:1024}
+			]
+		},
+
+		unCrouch:
+		{
+			fps:6,
+			cycle:false,
+			frames:
+			[
+				{width:128, height:128, startX:256, startY:1024},
+				{width:128, height:128, startX:128, startY:1024},
+				{width:128, height:128, startX:0, startY:1024},
+				{width:128, height:128, startX:256, startY:896},
+				{width:128, height:128, startX:128, startY:896},
+				{width:128, height:128, startX:0, startY:896}
 			]
 		},
 		//The attack animation 

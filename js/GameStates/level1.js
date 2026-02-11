@@ -114,6 +114,13 @@ gameStates[`level1`] = function()
 	{
 		wiz.top={x:0,y:-wiz.hitBoxHeight/2};
 	}
+	document.addEventListener('keyup', function(event) 
+	{
+		if(event.key.toLowerCase() === 's')
+		{
+			wiz.changeState('unCrouch')
+		}
+	});
 
 	if(keys[`D`]  )
 	{
