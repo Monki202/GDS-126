@@ -62,10 +62,8 @@ var playerData ={
 			[
 				{width:128, height:128, startX:0, startY:640},
 				{width:128, height:128, startX:128, startY:640},
-				{width:128, height:128, startX:256, startY:640},
 				{width:128, height:128, startX:0, startY:768},
-				{width:128, height:128, startX:128, startY:768},
-				{width:128, height:128, startX:256, startY:768}
+				{width:128, height:128, startX:128, startY:768}
 			]
 		},
 		//The crouch animation 
@@ -96,6 +94,21 @@ var playerData ={
 				{width:128, height:128, startX:256, startY:896},
 				{width:128, height:128, startX:128, startY:896},
 				{width:128, height:128, startX:0, startY:896}
+			]
+		},
+
+		Sleep:
+		{
+			fps:17,
+			cycle:true,
+			repeat: true,
+			frames:
+			[
+				{width:128, height:128, startX:0, startY:1152},
+				{width:128, height:128, startX:128, startY:1152},
+				{width:128, height:128, startX:256, startY:1152},
+				{width:128, height:128, startX:0, startY:1280},
+				{width:128, height:128, startX:128, startY:1280}
 			]
 		},
 		//The attack animation 

@@ -99,21 +99,53 @@ for(let i=0; i<100; i++)
 
 gameStates[`level1`] = function()
 {
-	if(!keys[`W`] && !keys[`S`] && !keys[`D`] && !keys[`A`] && !keys[` `] && canShoot && wiz.canJump)
+	if(!keys[`W`] && !keys[`S`] && !keys[`D`] && !keys[`A`] && !keys[` `] && canShoot && wiz.canJump && wiz.currentState !== 'crouch')
 	{
 		wiz.changeState(`idle`)
 	}
 	
 	
+	
 	if(keys[`S`])
 	{
 		wiz.top={x:0,y:0};
-		wiz.changeState(`crouch`)
+		if(wiz.currentState !== 'Sleep')
+		{
+			wiz.changeState(`crouch`)
+		}
+		setTimeout(() => {
+				if(wiz.currentState === 'crouch')
+				{
+					wiz.changeState('Sleep')
+					console.log("currently sleeping")
+				}
+			}, 100);
+		document.addEventListener('keyup', function(event) 
+		{
+			if(event.key.toLowerCase() === 's')
+			{
+				wiz.changeState('unCrouch')
+			}
+		});
 	}
 	else
 	{
 		wiz.top={x:0,y:-wiz.hitBoxHeight/2};
 	}
+	// document.addEventListener('keydown', function(event)
+	// {
+	// 	if(event.key.toLowerCase() === 's')
+	// 	{
+	// 		setTimeout(() => 
+	// 		{
+	// 			if(wiz.currentState === 'crouch')
+	// 			{
+	// 				wiz.changeState('Sleep')
+	// 				console.log("currently sleeping")
+	// 			}
+	// 		}, 100);
+	// 	}
+	// });
 	document.addEventListener('keyup', function(event) 
 	{
 		if(event.key.toLowerCase() === 's')
