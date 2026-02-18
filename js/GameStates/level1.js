@@ -60,21 +60,20 @@ levelItems.add([caveBack.grid, ground, plat, cave.grid]);
 
 //Very back background
 var sky = new GameObject({width:canvas.width, height:canvas.height, color:"cyan"})
-sky.img.src = `images/sky.png`
-
-/*
- 	//Not used, unless you want a 4th level of paralax
-	var clouds = new GameObject({x:level.x,y:level.y})
-	clouds.img.src=`images/ground.png`
-*/
+sky.img.src = `images/BackgroundImages/Background.png`
 
 //repeating background
 var rbg = new GameObject({x:level.x, y:level.y, width:1024, height:512})
-rbg.img.src=`images/hills.png`
+rbg.img.src=`images/MyTextures/CityBackGround.png`
+
+//Not used, unless you want a 4th level of paralax
+var clouds = new GameObject({x:level.x,y:level.y, width:1024, height:512})
+clouds.img.src=`images/MyTextures/CloudBackgrounds.png`
+
 
 //middleground
-var bg = new GameObject({x:level.x,y:level.y, width:canvas.width*4, height:canvas.height})
-bg.img.src=`images/bgfull.png`
+var bg = new GameObject({x:level.x - 200,y:level.y, width:canvas.width*4, height:canvas.height})
+bg.img.src=`images/MyTextures/MiddleGround.png`
 
 /*------------------vvBULLET STUFFvv----------------------*/
 
@@ -109,6 +108,7 @@ gameStates[`level1`] = function()
 	if(keys[`S`])
 	{
 		wiz.top={x:0,y:0};
+		wiz.bottom={x:0,y:63};
 		if(wiz.currentState !== 'Sleep')
 		{
 			wiz.changeState(`crouch`)
@@ -202,8 +202,15 @@ gameStates[`level1`] = function()
 
 			bullets[currentBullet].vx = 5*wiz.dir;
 			bullets[currentBullet].world = level;
-			bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) ;
-			bullets[currentBullet].y = wiz.y + 20;
+			if(wiz.dir ==1)
+			{
+				bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) -85;
+			}
+			else
+			{
+				bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) +85;
+			}
+			bullets[currentBullet].y = wiz.y + 5;
 			bullets[currentBullet].dir = wiz.dir;
 			
 			//sounds.play(`splode`,1)
@@ -286,7 +293,7 @@ gameStates[`level1`] = function()
 	}
 
 	//moves the clouds
-	//clouds.x = level.x*.25;
+	clouds.x = level.x*.25;
 	
 	if(rbg.x < -rbg.width || rbg.x > rbg.width)
 	{
@@ -309,6 +316,8 @@ gameStates[`level1`] = function()
 	//renders the sky
 	sky.render()
 	
+	
+	
 	//Renders the repeating background
 	rbg.drawStaticImage({x:0,y:0});
 	rbg.drawStaticImage({x:-rbg.width,y:0});
@@ -328,6 +337,7 @@ gameStates[`level1`] = function()
 	context.moveTo(0,wiz.bottom.y)
 	context.lineTo(canvas.width,wiz.bottom.y)
 	context.stroke();*/
+	
 
 	//Renders sprites group
 	sprites.play().render(`drawSprite`);
