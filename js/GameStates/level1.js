@@ -59,12 +59,24 @@ var levelItems=new Group();
 levelItems.add([caveBack.grid, ground, plat, cave.grid]);
 
 //Very back background
-var sky = new GameObject({width:canvas.width, height:canvas.height, color:"cyan"})
-sky.img.src = `images/BackgroundImages/Background.png`
+var sky = new GameObject({x:1000, y:220, width:2048, height:512, color:"cyan"})
+sky.img.src = `images/MyTextures/Background2Final.png`
 
 //repeating background
 var rbg = new GameObject({x:level.x, y:level.y, width:1024, height:512})
 rbg.img.src=`images/MyTextures/CityBackGround.png`
+
+//repeating2 background
+var rbg2 = new GameObject({x:level.x + 600, y:level.y + 40, width:1024, height:512})
+rbg2.img.src=`images/MyTextures/CityBackGround.png`
+
+//repeating2 background
+var rbg4 = new GameObject({x:level.x +200, y:level.y + 20, width:1024, height:512})
+rbg4.img.src=`images/MyTextures/CityBackGround.png`
+
+//repeating3 background
+var rbg3 = new GameObject({x:level.x, y:level.y, width:1024, height:512})
+rbg3.img.src=`images/MyTextures/CloudsBackground2.png`
 
 //Not used, unless you want a 4th level of paralax
 var clouds = new GameObject({x:level.x,y:level.y, width:1024, height:512})
@@ -286,10 +298,22 @@ gameStates[`level1`] = function()
 		level.x -= offset.x;
 
 	//moves repeating background
-		rbg.x -= offset.x*.5;
+		sky.x -= offset.x*.005;
+
+	//moves repeating background
+		rbg.x -= offset.x*.05;
+
+	//moves repeating background
+		rbg4.x -= offset.x*.1;
+
+	//moves repeating background
+		rbg2.x -= offset.x*.2;
+
+	//moves repeating background
+		rbg3.x -= offset.x*.01;
 
 	//moves the middleground
-		bg.x -= offset.x*.75;
+		bg.x -= offset.x*.7;
 	}
 
 	//moves the clouds
@@ -298,6 +322,16 @@ gameStates[`level1`] = function()
 	if(rbg.x < -rbg.width || rbg.x > rbg.width)
 	{
 		rbg.x=0; 
+	}
+
+	if(rbg2.x < -rbg2.width || rbg2.x > rbg2.width)
+	{
+		rbg2.x=0; 
+	}
+	
+	if(rbg3.x < -rbg3.width || rbg3.x > rbg3.width)
+	{
+		rbg3.x=0; 
 	}
 
 	
@@ -314,14 +348,30 @@ gameStates[`level1`] = function()
 	sky.color = skyPattern
 
 	//renders the sky
+	clouds.render()
 	sky.render()
 	
 	
 	
 	//Renders the repeating background
-	rbg.drawStaticImage({x:0,y:0});
+
+	rbg3.drawStaticImage({x:0,y:0});
+	rbg3.drawStaticImage({x:-rbg3.width,y:0});
+	rbg3.drawStaticImage({x:rbg3.width,y:0});
+	
+	rbg.drawStaticImage({x:0,y:40});
 	rbg.drawStaticImage({x:-rbg.width,y:0});
 	rbg.drawStaticImage({x:rbg.width,y:0});
+
+	rbg4.drawStaticImage({x:0,y:20});
+	rbg4.drawStaticImage({x:-rbg4.width,y:0});
+	rbg4.drawStaticImage({x:rbg4.width,y:0});
+
+	rbg2.drawStaticImage({x:0,y:-40});
+	rbg2.drawStaticImage({x:-rbg2.width,y:0});
+	rbg2.drawStaticImage({x:rbg2.width,y:0});
+
+	
 
 	//renders the midground
 	bg.drawStaticImage({x:0,y:0});
@@ -331,7 +381,6 @@ gameStates[`level1`] = function()
 
 	//renders the objects in the rect group
 	rects.render(`drawRect`)
-	
 	/*----Used for debugging----*/
 	/*context.beginPath()
 	context.moveTo(0,wiz.bottom.y)
