@@ -127,7 +127,24 @@ var playerData ={
 				{width:128, height:128, startX:256, startY:1536}
 				
 			]
+		},
+
+		//Bullet
+		bullet:
+		{
+			fps:3,
+			cycle:true,
+			//width:300,
+			frames:
+			[
+				{width:128, height:128, startX:0, startY:1664},
+				{width:128, height:128, startX:128, startY:1664},
+				{width:128, height:128, startX:256, startY:1664},
+				{width:128, height:128, startX:384, startY:1664}
+				
+			]
 		}
+		
 	}
 		
 }

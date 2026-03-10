@@ -1,7 +1,7 @@
 
 /*------------Use this if you want to implement States---------------*/
-var gravity = 1;
-var friction = {x:.85,y:.97}
+var gravity = 0.9;
+var friction = {x:1,y:1}
 
 var stage = new GameObject({width:canvas.width, height:canvas.height});
 
@@ -12,16 +12,26 @@ var level = new GameObject({x:0,y:0});
 var wiz = new GameObject({width:128, height:128, spriteData:playerData}).makeSprite(playerData)
 wiz.force=1.5
 
-//The ground
+//The groundInside
 var ground = new GameObject({width:canvas.width*10, x:canvas.width*10/2-200,height:64,y:canvas.height-32, color:"green", world:level})
-ground.img.src=`images/ground.png`
+ground.img.src=`images/GroundWoodInside.png`
+
+//The groundOutside
+var groundOutside = new GameObject({width:1280, height:128,y:canvas.height,x:canvas.width -640, color:"green", world:level})
+groundOutside.img.src='images/GroundOutside.png'
+
+//The groundOutside
+var groundOutside2 = new GameObject({width:-1280, height:128,y:canvas.height,x:canvas.width +2850, color:"green", world:level})
+groundOutside2.img.src='images/GroundOutside.png'
 
 //A platform
-var plat = new GameObject({width:256, height:64,y:canvas.height-200, color:"green", world:level})
+var plat = new GameObject({width:128+64, height:64,y:canvas.height-200, color:"green", world:level})
+plat.img.src='images/PlatformMetal.png'
 
 
 
-var leftBorder = new GameObject({width:50, height:canvas.height, world:level, x:0})
+var leftBorder = new GameObject({width:50, height:canvas.height, world:level, x:100})
+leftBorder.img.src='images/PlatformMetal.png'
 
 
 //Cave foreground Tile Grid
@@ -45,7 +55,7 @@ g1.add([ground, leftBorder, caveHit.grid])
 
 //Used to draw the rectangles
 var rects = new Group();
-rects.add([ground,plat])
+rects.add([ground])
 
 //used to render the sprites
 var sprites = new Group();
@@ -84,7 +94,7 @@ clouds.img.src=`images/MyTextures/CloudBackgrounds.png`
 
 
 //middleground
-var bg = new GameObject({x:level.x - 200,y:level.y, width:canvas.width*4, height:canvas.height})
+var bg = new GameObject({x:level.x - 200,y:level.y + 50, width:canvas.width*4, height:canvas.height})
 bg.img.src=`images/MyTextures/MiddleGround.png`
 
 /*------------------vvBULLET STUFFvv----------------------*/
@@ -92,16 +102,16 @@ bg.img.src=`images/MyTextures/MiddleGround.png`
 var bullets=[]
 var canShoot=true;
 var shotTimer = 0;
-var shotDelay = 21;
+var shotDelay = 50;
 var currentBullet = 0;
 
 for(let i=0; i<100; i++)
 {
-	bullets[i] = new GameObject({width:64, height:64})
-	//bullets[i].img.src="images/mrt.jpg"
+	bullets[i] = new GameObject({width:100, height:100})
+	//bullets[i].img.src="images/RobotAnimations/RocketRobot-Sheet.png"
 	bullets[i].makeSprite(playerData)
 	bullets[i].y=-10000
-	bullets[i].changeState(`walk`)
+	bullets[i].changeState(`bullet`)
 }
 
 //console.log(bullets)
@@ -212,17 +222,17 @@ gameStates[`level1`] = function()
 			shotTimer = shotDelay
 			//console.log(`Boom`)
 
-			bullets[currentBullet].vx = 5*wiz.dir;
+			bullets[currentBullet].vx = 10*wiz.dir;
 			bullets[currentBullet].world = level;
 			if(wiz.dir ==1)
 			{
-				bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) -85;
+				bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) -60;
 			}
 			else
 			{
 				bullets[currentBullet].x = wiz.x-level.x + (wiz.dir * 96) +85;
 			}
-			bullets[currentBullet].y = wiz.y + 5;
+			bullets[currentBullet].y = wiz.y + 0;
 			bullets[currentBullet].dir = wiz.dir;
 			
 			//sounds.play(`splode`,1)
@@ -340,7 +350,7 @@ gameStates[`level1`] = function()
 	var groundPattern = context.createPattern(ground.img, `repeat`);
 	//Applies pattern to ground and platform
 	ground.color = groundPattern
-	plat.color = groundPattern
+	//plat.color = groundPattern
 
 	//Sets up pattern for the sky
 	var skyPattern = context.createPattern(sky.img, `repeat`);
@@ -375,12 +385,17 @@ gameStates[`level1`] = function()
 
 	//renders the midground
 	bg.drawStaticImage({x:0,y:0});
+
+	plat.drawStaticImage()
+
 	
 	//alternate methd for rendering the repeating background
 	//rbg.render(`drawStaticImage`, [0,0])
 
 	//renders the objects in the rect group
 	rects.render(`drawRect`)
+	groundOutside.drawStaticImage()
+	groundOutside2.drawStaticImage()
 	/*----Used for debugging----*/
 	/*context.beginPath()
 	context.moveTo(0,wiz.bottom.y)
@@ -397,7 +412,7 @@ gameStates[`level1`] = function()
 	//Moves, checks collision and renders projectiles.
 	for(let i=0; i<bullets.length; i++)
 	{
-		if(bullets[i].overlap(stage)) bullets[i].vy+=1;
+		if(bullets[i].overlap(stage)) bullets[i].vy+=0;
 		bullets[i].move()
 		bullets[i].play(function(){return}).drawSprite()
 		//bullets[i].angle+=10
