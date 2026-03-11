@@ -1,3 +1,6 @@
 canvas{
-	border:1px solid black;
+	border:10px solid rgb(87, 0, 130);
+	position: fixed;
+
+  	
 }

@@ -1,7 +1,7 @@
 
 /*------------Use this if you want to implement States---------------*/
-var gravity = 0.9;
-var friction = {x:1,y:1}
+var gravity = 1.1;
+var friction = {x:0.87,y:1}
 
 var stage = new GameObject({width:canvas.width, height:canvas.height});
 
@@ -28,6 +28,13 @@ groundOutside2.img.src='images/GroundOutside.png'
 var plat = new GameObject({width:128+64, height:64,y:canvas.height-200, color:"green", world:level})
 plat.img.src='images/PlatformMetal.png'
 
+//ListOfMusic&Sounds
+var jumpSound = new Audio("sounds/my sounds/my sounds/8bit_bomb_explosion.wav")
+jumpSound.volume = 0.3;
+var attackSound = new Audio("sounds/my sounds/my sounds/8-bit-kit-explosion-3_G_minor.wav")
+attackSound.volume = 0.3;
+var attackSound2 = new Audio("sounds/my sounds/my sounds/whoosh-hit-hip-shot.wav")
+attackSound2.volume = 0.05;
 
 
 var leftBorder = new GameObject({width:50, height:canvas.height, world:level, x:100})
@@ -96,6 +103,8 @@ clouds.img.src=`images/MyTextures/CloudBackgrounds.png`
 //middleground
 var bg = new GameObject({x:level.x - 200,y:level.y + 50, width:canvas.width*4, height:canvas.height})
 bg.img.src=`images/MyTextures/MiddleGround.png`
+
+
 
 /*------------------vvBULLET STUFFvv----------------------*/
 
@@ -202,6 +211,8 @@ gameStates[`level1`] = function()
 		wiz.canJump = false;
 		wiz.vy = wiz.jumpHeight;
 		wiz.changeState(`jump`)
+		jumpSound.currentTime = 0;
+		jumpSound.play()
 		//sounds.play(`splode`,1)
 	}
 	shotTimer--;
@@ -220,6 +231,10 @@ gameStates[`level1`] = function()
 		{
 			wiz.changeState(`attack`)
 			shotTimer = shotDelay
+			attackSound.currentTime = 0;
+			attackSound.play()
+			attackSound2.currentTime = 0;
+			attackSound2.play()
 			//console.log(`Boom`)
 
 			bullets[currentBullet].vx = 10*wiz.dir;
