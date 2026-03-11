@@ -237,7 +237,7 @@ gameStates[`level1`] = function()
 			attackSound2.play()
 			//console.log(`Boom`)
 
-			bullets[currentBullet].vx = 10*wiz.dir;
+			bullets[currentBullet].vx = 13*wiz.dir;
 			bullets[currentBullet].world = level;
 			if(wiz.dir ==1)
 			{
